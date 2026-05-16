@@ -1,0 +1,188 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-luxury-display);
+  --font-display: var(--font-luxury-display);
+  --color-brand-obsidian: var(--brand-obsidian);
+  --color-brand-charcoal: var(--brand-charcoal);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-champagne: var(--brand-champagne);
+  --color-brand-emerald: var(--brand-emerald);
+  --color-brand-ruby: var(--brand-ruby);
+  --color-brand-steel: var(--brand-steel);
+  --color-surface-glass: var(--surface-glass);
+  --color-surface-raised: var(--surface-raised);
+  --spacing-page: var(--page-gutter);
+  --shadow-luxury: var(--shadow-luxury);
+  --shadow-glow: var(--shadow-glow);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color-scheme: dark;
+  --brand-obsidian: oklch(0.115 0.015 255);
+  --brand-charcoal: oklch(0.18 0.018 255);
+  --brand-gold: oklch(0.78 0.13 82);
+  --brand-champagne: oklch(0.9 0.065 88);
+  --brand-emerald: oklch(0.68 0.135 162);
+  --brand-ruby: oklch(0.61 0.18 23);
+  --brand-steel: oklch(0.7 0.025 250);
+  --surface-glass: oklch(0.22 0.018 255 / 72%);
+  --surface-raised: oklch(0.18 0.018 255 / 92%);
+  --background: oklch(0.12 0.014 255);
+  --foreground: oklch(0.94 0.014 91);
+  --card: oklch(0.18 0.018 255 / 90%);
+  --card-foreground: oklch(0.94 0.014 91);
+  --popover: oklch(0.16 0.018 255 / 96%);
+  --popover-foreground: oklch(0.94 0.014 91);
+  --primary: var(--brand-gold);
+  --primary-foreground: oklch(0.14 0.016 255);
+  --secondary: oklch(0.24 0.025 255);
+  --secondary-foreground: oklch(0.92 0.018 91);
+  --muted: oklch(0.24 0.02 255 / 74%);
+  --muted-foreground: oklch(0.74 0.025 250);
+  --accent: var(--brand-emerald);
+  --accent-foreground: oklch(0.08 0.015 255);
+  --destructive: var(--brand-ruby);
+  --border: oklch(0.96 0.02 91 / 14%);
+  --input: oklch(0.96 0.02 91 / 16%);
+  --ring: oklch(0.83 0.11 82 / 72%);
+  --chart-1: var(--brand-gold);
+  --chart-2: var(--brand-emerald);
+  --chart-3: var(--brand-ruby);
+  --chart-4: oklch(0.66 0.1 238);
+  --chart-5: oklch(0.82 0.08 310);
+  --radius: 0.5rem;
+  --page-gutter: clamp(1rem, 4vw, 2rem);
+  --container-sm: 40rem;
+  --container-md: 48rem;
+  --container-lg: 64rem;
+  --container-xl: 80rem;
+  --container-2xl: 96rem;
+  --shadow-luxury: 0 24px 80px oklch(0 0 0 / 40%);
+  --shadow-glow: 0 0 42px oklch(0.78 0.13 82 / 22%);
+  --sidebar: oklch(0.15 0.018 255);
+  --sidebar-foreground: oklch(0.94 0.014 91);
+  --sidebar-primary: var(--brand-gold);
+  --sidebar-primary-foreground: oklch(0.14 0.016 255);
+  --sidebar-accent: oklch(0.24 0.025 255);
+  --sidebar-accent-foreground: oklch(0.92 0.018 91);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    @apply h-full scroll-smooth font-sans;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply min-h-full bg-background text-foreground antialiased;
+    background-image:
+      linear-gradient(135deg, oklch(0.2 0.03 255 / 55%), transparent 42%),
+      linear-gradient(180deg, oklch(0.16 0.02 255), oklch(0.095 0.012 255));
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    content: "";
+    background:
+      linear-gradient(90deg, oklch(1 0 0 / 4%) 1px, transparent 1px),
+      linear-gradient(180deg, oklch(1 0 0 / 3%) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, black, transparent 82%);
+  }
+
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    @apply bg-cyan-400/30 text-cyan-50;
+  }
+}
+
+@layer utilities {
+  .container-page {
+    width: 100%;
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--page-gutter);
+  }
+
+  .container-readable {
+    width: 100%;
+    max-width: var(--container-md);
+    margin-inline: auto;
+    padding-inline: var(--page-gutter);
+  }
+
+  .glass-panel {
+    background: var(--surface-glass);
+    box-shadow: var(--shadow-luxury);
+    backdrop-filter: blur(20px) saturate(130%);
+  }
+
+  .gold-text {
+    color: var(--brand-champagne);
+    text-shadow: 0 0 30px oklch(0.78 0.13 82 / 18%);
+  }
+
+  .premium-border {
+    border-color: color-mix(in oklch, var(--brand-champagne) 24%, transparent);
+  }
+}
