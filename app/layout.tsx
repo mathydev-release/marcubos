@@ -35,9 +35,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} dark h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} dark h-full overflow-hidden antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      <body className="flex h-full flex-col overflow-hidden">
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

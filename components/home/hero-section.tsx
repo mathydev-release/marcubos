@@ -8,6 +8,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Clock3,
+  Flame,
   ShieldCheck,
   Sparkles,
   Ticket,
@@ -141,6 +142,7 @@ function AnimatedBackground() {
 
 function FeaturedGiveawayCard() {
   const progress = 72;
+  const entrantsCount = 720;
 
   return (
     <m.div
@@ -152,8 +154,9 @@ function FeaturedGiveawayCard() {
       <Card className="relative border-cyan-400/20 bg-[#071431]/88 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <CardHeader className="gap-3">
           <div className="flex items-center justify-between gap-3">
-            <Badge className="border-cyan-400/30 bg-cyan-400/10 text-cyan-300">
-              Featured draw
+            <Badge className="border-red-400/35 bg-red-500/15 text-red-200 shadow-[0_0_24px_rgba(239,68,68,0.16)]">
+              <Flame className="size-3.5 fill-red-400/35 text-red-300" aria-hidden="true" />
+              Most Popular
             </Badge>
             <div className="flex items-center gap-1 text-xs font-medium text-muted-foreground">
               <Clock3 className="size-3.5 text-yellow-300" aria-hidden="true" />
@@ -161,7 +164,7 @@ function FeaturedGiveawayCard() {
             </div>
           </div>
           <CardTitle className="text-2xl text-foreground">
-             GT Coupe 2026 + EUR 10,000
+             Mercedes-Benz AMG GT Coupe 63 4Matic+
           </CardTitle>
         </CardHeader>
 
@@ -173,7 +176,7 @@ function FeaturedGiveawayCard() {
               transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
             />
             <Image
-              src="/masinatest.png"
+              src="/amg_gt1.png"
               alt="Featured giveaway car"
               fill
               sizes="(min-width: 768px) 440px, 100vw"
@@ -184,8 +187,19 @@ function FeaturedGiveawayCard() {
             <div className="absolute right-3 top-3 rounded-lg border border-cyan-400/15 bg-[#020b1d]/75 px-3 py-2 backdrop-blur">
               <div className="text-xs text-muted-foreground">Prize value</div>
               <div className="font-mono text-sm font-semibold text-foreground">
-                EUR 84,900
+                EUR 105,900
               </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-sm text-cyan-100/80">
+              <Users className="size-4 text-cyan-300" aria-hidden="true" />
+              <span>{entrantsCount} entrants</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm font-semibold text-emerald-300">
+              <Ticket className="size-4" aria-hidden="true" />
+              <span>Cash Alternative: EUR 10,000</span>
             </div>
           </div>
 
@@ -199,10 +213,7 @@ function FeaturedGiveawayCard() {
             <div className="h-2 overflow-hidden rounded-full bg-muted">
               <m.div
                 className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500"
-                initial={{ width: 0 }}
-                whileInView={{ width: `${progress}%` }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                style={{ width: `${progress}%` }}
               />
             </div>
           </div>
@@ -245,16 +256,12 @@ export function HeroSection() {
       <AnimatedBackground />
       <Container className="grid min-h-[calc(100dvh-4rem)] items-center gap-10 py-12 md:grid-cols-[0.95fr_1.05fr] md:py-16 lg:gap-14">
         <div className="flex flex-col items-start">
-          <m.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div>
             <Badge className="mb-5 border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-emerald-300 shadow-[0_0_24px_rgba(52,211,153,0.12)]">
               <Sparkles className="size-3.5" aria-hidden="true" />
               Premium draws. Real prizes. Transparent winners.
             </Badge>
-          </m.div>
+          </div>
 
           <h1 className="max-w-3xl font-heading text-5xl font-semibold leading-[0.95] tracking-normal text-foreground sm:text-6xl lg:text-7xl">
             Win luxury prizes with a draw experience built to feel elite.

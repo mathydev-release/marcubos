@@ -9,7 +9,7 @@ export function AppShell({
     <div
       data-slot="app-shell"
       className={cn(
-        "relative isolate flex min-h-dvh flex-col overflow-hidden bg-background text-foreground",
+        "relative isolate flex h-dvh flex-col overflow-hidden bg-background text-foreground",
         className
       )}
       {...props}

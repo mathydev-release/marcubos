@@ -11,6 +11,8 @@ const giveaways = [
     targetDate: "2026-06-18T20:00:00+03:00",
     entrantsCount: 720,
     maxEntrants: 1000,
+    badge: "Most Popular",
+    cashAlternative: "EUR 10,000",
   },
   {
     title: "IPHONE 17 PRO MAX",
@@ -21,6 +23,7 @@ const giveaways = [
     targetDate: "2026-06-12T20:00:00+03:00",
     entrantsCount: 436,
     maxEntrants: 650,
+    cashAlternative: "EUR 1,000",
   },
   {
     title: "EUR 3,000 CASH PRIZE",
@@ -35,14 +38,11 @@ const giveaways = [
 
 export function FeaturedGiveawaysSection() {
   return (
-    <section id="giveaways" className="bg-[#020b1d] py-16 md:py-20">
+    <section id="giveaways" className="bg-[#020b1d] pb-16 pt-10 md:pb-20 md:pt-12">
       <Container>
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-cyan-300">
-              Live draws
-            </p>
-            <h2 className="mt-2 text-4xl font-black uppercase tracking-tight text-white md:text-5xl">
+            <h2 className="text-4xl font-black uppercase tracking-tight text-white md:text-5xl">
               <span className="text-cyan-300">JUST</span> LAUNCHED
             </h2>
           </div>

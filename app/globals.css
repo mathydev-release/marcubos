@@ -120,6 +120,8 @@
 @layer base {
   html {
     @apply h-full scroll-smooth font-sans;
+    scrollbar-color: #1fbfe6 #020b1d;
+    scrollbar-width: thin;
   }
 
   * {
@@ -132,6 +134,8 @@
       linear-gradient(135deg, oklch(0.2 0.03 255 / 55%), transparent 42%),
       linear-gradient(180deg, oklch(0.16 0.02 255), oklch(0.095 0.012 255));
     text-rendering: optimizeLegibility;
+    scrollbar-color: #1fbfe6 #020b1d;
+    scrollbar-width: thin;
   }
 
   body::before {
@@ -157,6 +161,30 @@
 }
 
 @layer utilities {
+  .custom-scrollbar {
+    scrollbar-color: #1fbfe6 #071d3a;
+    scrollbar-width: thin;
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #020b1d;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    border: 2px solid #020b1d;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #22d3ee, #2563eb);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #67e8f9, #3b82f6);
+  }
+
   .container-page {
     width: 100%;
     max-width: var(--container-xl);

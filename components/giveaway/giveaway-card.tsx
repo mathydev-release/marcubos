@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { m } from "framer-motion";
-import { ArrowRight, Clock3, Ticket, Users } from "lucide-react";
+import { ArrowRight, Clock3, Flame, Ticket, Users } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -30,6 +30,7 @@ export type GiveawayCardProps = Readonly<{
   maxEntrants: number;
   badge?: string;
   showCountdown?: boolean;
+  cashAlternative?: string;
   className?: string;
 }>;
 
@@ -112,9 +113,12 @@ export function GiveawayCard({
   maxEntrants,
   badge = "Just launched",
   showCountdown = true,
+  cashAlternative,
   className,
 }: GiveawayCardProps) {
   const progress = clampProgress((entrantsCount / maxEntrants) * 100);
+  const isMostPopular = badge.toLowerCase() === "most popular";
+  const BadgeIcon = isMostPopular ? Flame : Ticket;
 
   return (
     <m.article
@@ -139,8 +143,21 @@ export function GiveawayCard({
               />
               <div className="absolute inset-0 bg-cyan-500/7 mix-blend-color" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#020b1d]/78 via-transparent to-[#020b1d]/12" />
-              <Badge className="absolute bottom-3 left-3 border-cyan-300/25 bg-cyan-400/15 text-cyan-200 backdrop-blur">
-                <Ticket className="size-3.5" aria-hidden="true" />
+              <Badge
+                className={cn(
+                  "absolute bottom-3 left-3 backdrop-blur",
+                  isMostPopular
+                    ? "border-red-400/35 bg-red-500/16 text-red-200 shadow-[0_0_22px_rgba(239,68,68,0.18)]"
+                    : "border-cyan-300/25 bg-cyan-400/15 text-cyan-200"
+                )}
+              >
+                <BadgeIcon
+                  className={cn(
+                    "size-3.5",
+                    isMostPopular ? "fill-red-400/35 text-red-300" : undefined
+                  )}
+                  aria-hidden="true"
+                />
                 {badge}
               </Badge>
             </div>
@@ -167,6 +184,13 @@ export function GiveawayCard({
               ) : null}
             </div>
 
+            {cashAlternative ? (
+              <div className="flex items-center gap-2 text-sm font-semibold text-emerald-300">
+                <Ticket className="size-4" aria-hidden="true" />
+                <span>Cash Alternative: {cashAlternative}</span>
+              </div>
+            ) : null}
+
             {showCountdown ? (
               <GiveawayCountdown targetDate={targetDate} />
             ) : null}
@@ -181,10 +205,7 @@ export function GiveawayCard({
               <div className="h-2 overflow-hidden rounded-full bg-[#020b1d]">
                 <m.div
                   className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${progress}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ width: `${progress}%` }}
                 />
               </div>
             </div>

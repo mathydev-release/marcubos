@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { m } from "framer-motion";
 import {
   Banknote,
   Car,
@@ -10,7 +9,8 @@ import {
   ChevronRight,
   Gift,
   Home,
-  Menu,
+  Info,
+  MessageCircle,
   Smartphone,
   UserRoundCheck,
   X,
@@ -117,11 +117,13 @@ function DrawerVisual({
 
 export function Navbar({ className }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [activeDrawerTab, setActiveDrawerTab] = React.useState("Cars");
+  const [closesSoonOpen, setClosesSoonOpen] = React.useState(true);
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 bg-[#071431] text-white shadow-[0_2px_18px_rgba(0,0,0,0.35)]",
+        "fixed inset-x-0 top-0 z-50 bg-[#071431] text-white shadow-[0_2px_18px_rgba(0,0,0,0.35)]",
         className
       )}
     >
@@ -135,13 +137,17 @@ export function Navbar({ className }: NavbarProps) {
               aria-expanded={mobileMenuOpen}
               onClick={() => setMobileMenuOpen(true)}
             >
-              <Menu className="size-7" aria-hidden="true" />
+              <span className="flex flex-col gap-[3px]" aria-hidden="true">
+                <span className="h-0.5 w-5 rounded-full bg-current" />
+                <span className="h-0.5 w-5 rounded-full bg-current" />
+                <span className="h-0.5 w-5 rounded-full bg-current" />
+              </span>
             </button>
 
             <SheetContent
               side="left"
               showCloseButton={false}
-              className="w-[min(22.5rem,100vw)] border-r-0 border-[#183666] bg-[#071431] p-0 text-white"
+              className="w-[min(22.5rem,100vw)] border-r-0 border-[#183666] bg-[#071431] p-0 text-white duration-300"
               style={{
                 width: "min(22.5rem, 100vw)",
                 maxWidth: "min(22.5rem, 100vw)",
@@ -161,25 +167,24 @@ export function Navbar({ className }: NavbarProps) {
                   >
                     <X className="size-6" aria-hidden="true" />
                   </button>
-                  {drawerTabs.map((item, index) => (
-                    <SheetClose key={item.href} asChild>
-                      <Link
-                        href={item.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="relative flex flex-col items-center justify-center gap-1 text-xs font-semibold text-white transition-colors hover:bg-white/10"
-                      >
-                        <item.icon className="size-5" aria-hidden="true" />
-                        {item.label}
-                        {index === 2 ? (
-                          <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-cyan-400" />
-                        ) : null}
-                      </Link>
-                    </SheetClose>
+                  {drawerTabs.map((item) => (
+                    <button
+                      key={item.href}
+                      type="button"
+                      onClick={() => setActiveDrawerTab(item.label)}
+                      className="relative flex flex-col items-center justify-center gap-1 text-xs font-semibold text-white transition-colors hover:bg-white/10"
+                    >
+                      <item.icon className="size-5" aria-hidden="true" />
+                      {item.label}
+                      {activeDrawerTab === item.label ? (
+                        <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-cyan-400" />
+                      ) : null}
+                    </button>
                   ))}
                 </div>
               </SheetHeader>
 
-              <div className="h-[calc(100dvh-3.5rem)] overflow-y-auto bg-[#071d3a] pb-8">
+              <div className="custom-scrollbar h-[calc(100dvh-3.5rem)] overflow-y-auto bg-[#071d3a] pb-8">
                 <div className="space-y-3 p-4">
                   {featureCards.map((item) => (
                     <SheetClose key={item.href} asChild>
@@ -216,13 +221,22 @@ export function Navbar({ className }: NavbarProps) {
                       type="button"
                       className="grid size-7 place-items-center rounded-md bg-white/8 text-white"
                       aria-label="Collapse Closes Soon"
+                      aria-expanded={closesSoonOpen}
+                      onClick={() => setClosesSoonOpen((open) => !open)}
                     >
-                      <ChevronDown className="size-5" aria-hidden="true" />
+                      <ChevronDown
+                        className={cn(
+                          "size-5 transition-transform",
+                          closesSoonOpen ? "rotate-0" : "-rotate-90"
+                        )}
+                        aria-hidden="true"
+                      />
                     </button>
                   </div>
                 </div>
 
-                <div className="space-y-3 p-4">
+                {closesSoonOpen ? (
+                  <div className="space-y-3 p-4">
                   <div className="flex items-center justify-between">
                     <h2 className="text-sm font-bold text-white">Closing draws</h2>
                     <Link
@@ -260,6 +274,32 @@ export function Navbar({ className }: NavbarProps) {
                       </Link>
                     </SheetClose>
                   ))}
+                  </div>
+                ) : null}
+
+                <div className="mt-4 border-t border-white/10 p-4">
+                  <div className="grid gap-2">
+                    <SheetClose asChild>
+                      <Link
+                        href="/#online-chat"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 rounded-md px-3 py-3 text-sm font-semibold text-white/85 transition-colors hover:bg-white/10 hover:text-white"
+                      >
+                        <MessageCircle className="size-5 text-cyan-300" />
+                        Online Chat
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link
+                        href="/about"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 rounded-md px-3 py-3 text-sm font-semibold text-white/85 transition-colors hover:bg-white/10 hover:text-white"
+                      >
+                        <Info className="size-5 text-cyan-300" />
+                        About Us
+                      </Link>
+                    </SheetClose>
+                  </div>
                 </div>
               </div>
             </SheetContent>
@@ -272,12 +312,7 @@ export function Navbar({ className }: NavbarProps) {
                 href={item.href}
                 className="group relative flex h-[58px] items-center gap-2 px-2.5 text-sm font-semibold text-white outline-none transition-colors hover:text-cyan-200 focus-visible:ring-2 focus-visible:ring-cyan-400 2xl:px-3.5"
               >
-                <m.span
-                  className="absolute inset-x-1 bottom-0 h-1 rounded-t-full bg-cyan-400 opacity-0"
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.16 }}
-                  aria-hidden="true"
-                />
+                <span className="absolute inset-x-1 bottom-0 h-1 rounded-t-full bg-cyan-400 opacity-0 transition-opacity duration-150 group-hover:opacity-100" />
                 <item.icon
                   className="relative size-5 text-white transition-colors group-hover:text-cyan-300"
                   aria-hidden="true"
