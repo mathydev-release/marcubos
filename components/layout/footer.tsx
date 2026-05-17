@@ -372,7 +372,8 @@ export function Footer({ className }: Readonly<{ className?: string }>) {
                   {item.icon ? (
                     <item.icon
                       className="size-3.5 text-cyan-300 group-hover:text-fuchsia-300"
-                      aria-hidden="true"
+                      aria-hidden={true}
+					  //aria-hidden="true"
                     />
                   ) : null}
                   {item.label}
