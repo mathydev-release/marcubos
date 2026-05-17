@@ -205,7 +205,10 @@ export function GiveawayCard({
               <div className="h-2 overflow-hidden rounded-full bg-[#020b1d]">
                 <m.div
                   className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500"
-                  style={{ width: `${progress}%` }}
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${progress}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 />
               </div>
             </div>

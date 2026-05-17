@@ -33,6 +33,7 @@ const giveaways = [
     targetDate: "2026-06-08T20:00:00+03:00",
     entrantsCount: 812,
     maxEntrants: 900,
+    cashAlternative: "-",
   },
 ];
 
