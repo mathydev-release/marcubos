@@ -32,6 +32,113 @@ const trustItems = [
 
 const countdownLabels = ["Days", "Hours", "Minutes", "Seconds"] as const;
 
+const featuredConfettiPieces = [
+  {
+    left: "8%",
+    top: "-8%",
+    size: "h-2.5 w-1",
+    className: "bg-cyan-300 text-cyan-300",
+    x: [0, 18, -10, 14],
+    y: [0, 170, 350, 520],
+    rotate: [0, 130, 260, 420],
+    rotateX: [20, 160, 280, 380],
+    rotateY: [0, 90, 210, 330],
+    duration: 6.6,
+    delay: 0,
+  },
+  {
+    left: "17%",
+    top: "-12%",
+    size: "h-1.5 w-4",
+    className: "bg-fuchsia-400 text-fuchsia-400",
+    x: [0, -22, 12, -16],
+    y: [0, 150, 330, 500],
+    rotate: [20, 190, 300, 460],
+    rotateX: [0, 120, 240, 360],
+    rotateY: [60, 180, 270, 420],
+    duration: 7.4,
+    delay: 1.1,
+  },
+  {
+    left: "29%",
+    top: "-9%",
+    size: "h-2 w-2",
+    className: "bg-emerald-300 text-emerald-300",
+    x: [0, 14, 30, 4],
+    y: [0, 130, 310, 490],
+    rotate: [0, 170, 280, 450],
+    rotateX: [40, 180, 280, 440],
+    rotateY: [10, 150, 260, 380],
+    duration: 6.9,
+    delay: 2.2,
+  },
+  {
+    left: "42%",
+    top: "-11%",
+    size: "h-3 w-1",
+    className: "bg-sky-300 text-sky-300",
+    x: [0, -12, 18, -4],
+    y: [0, 160, 340, 510],
+    rotate: [30, 150, 290, 430],
+    rotateX: [10, 130, 250, 370],
+    rotateY: [70, 190, 300, 460],
+    duration: 7.8,
+    delay: 0.55,
+  },
+  {
+    left: "54%",
+    top: "-10%",
+    size: "h-1.5 w-3.5",
+    className: "bg-violet-300 text-violet-300",
+    x: [0, 20, 6, 26],
+    y: [0, 145, 320, 505],
+    rotate: [10, 210, 330, 500],
+    rotateX: [30, 170, 290, 430],
+    rotateY: [0, 110, 260, 390],
+    duration: 7.1,
+    delay: 1.75,
+  },
+  {
+    left: "66%",
+    top: "-13%",
+    size: "h-2 w-1",
+    className: "bg-yellow-300 text-yellow-300",
+    x: [0, -18, -2, -24],
+    y: [0, 155, 335, 515],
+    rotate: [0, 160, 320, 480],
+    rotateX: [70, 190, 320, 440],
+    rotateY: [20, 130, 250, 410],
+    duration: 6.3,
+    delay: 2.8,
+  },
+  {
+    left: "78%",
+    top: "-8%",
+    size: "h-2.5 w-1.5",
+    className: "bg-cyan-200 text-cyan-200",
+    x: [0, 12, -18, 6],
+    y: [0, 140, 315, 500],
+    rotate: [45, 180, 310, 465],
+    rotateX: [0, 140, 280, 420],
+    rotateY: [50, 190, 310, 470],
+    duration: 7.6,
+    delay: 0.85,
+  },
+  {
+    left: "89%",
+    top: "-14%",
+    size: "h-1.5 w-4",
+    className: "bg-pink-400 text-pink-400",
+    x: [0, -24, -8, -30],
+    y: [0, 165, 345, 525],
+    rotate: [15, 185, 315, 485],
+    rotateX: [30, 155, 275, 400],
+    rotateY: [80, 220, 340, 500],
+    duration: 6.8,
+    delay: 3.35,
+  },
+]
+
 type CountdownValue = Readonly<{
   days: string;
   hours: string;
@@ -140,6 +247,48 @@ function AnimatedBackground() {
   );
 }
 
+function FeaturedCardConfetti() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 z-20 overflow-hidden rounded-xl [perspective:900px]"
+      aria-hidden="true"
+    >
+      <div className="absolute inset-x-4 top-0 h-20 bg-gradient-to-b from-cyan-300/10 to-transparent blur-2xl" />
+      {featuredConfettiPieces.map((piece, index) => (
+        <m.span
+          key={`${piece.left}-${index}`}
+          className={cn(
+            "absolute block rounded-[2px] opacity-0 shadow-[0_0_14px_currentColor] will-change-transform",
+            piece.size,
+            piece.className,
+          )}
+          style={{
+            left: piece.left,
+            top: piece.top,
+            transformStyle: "preserve-3d",
+          }}
+          animate={{
+            x: piece.x,
+            y: piece.y,
+            rotate: piece.rotate,
+            rotateX: piece.rotateX,
+            rotateY: piece.rotateY,
+            opacity: [0, 0.9, 0.78, 0],
+            scale: [0.72, 1, 0.92, 0.74],
+          }}
+          transition={{
+            duration: piece.duration,
+            delay: piece.delay,
+            repeat: Infinity,
+            ease: "linear",
+            times: [0, 0.14, 0.78, 1],
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function FeaturedGiveawayCard() {
   const progress = 72;
   const entrantsCount = 720;
@@ -151,6 +300,7 @@ function FeaturedGiveawayCard() {
       transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="absolute -inset-px rounded-xl bg-gradient-to-br from-cyan-400/45 via-blue-600/20 to-transparent opacity-80 blur-sm" />
+      <FeaturedCardConfetti />
       <Card className="relative border-cyan-400/20 bg-[#071431]/88 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <CardHeader className="gap-3">
           <div className="flex items-center justify-between gap-3">
